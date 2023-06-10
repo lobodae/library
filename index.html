@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"><!--wyswietlanie polskich znakow -->
+    <title>Biblioteka domowa</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Biblioteka domowa</h1>
+        <div class="form-container">
+            <h2>Logowanie</h2>
+            <form action="login.php" method="POST">
+                <input type="text" name="username" placeholder="Nazwa uzytkownika" required>
+                <input type="password" name="password" placeholder="Haslo" required>
+                <button type="submit">Zaloguj</button>
+            </form>
+        </div>
+        <div class="form-container">
+            <h2>Rejestracja</h2>
+            <form action="register.php" method="POST">
+                <input type="text" name="username" id="username" placeholder="Nazwa uzytkownika" required>
+                <input type="email" name="email" id="email" placeholder="Podaj email" required>
+                <input type="password" name="password" id="password" placeholder="Haslo" required>
+                <div class="button">
+                <button type="submit" id ="add" onclick="message()">Zarejestruj</button>
+                </div>
+            </form>
+        </div>
+        <div class="message">
+            <div class="success" id="success">Dodano użytkownika</div>
+            <div class="danger" id="danger">Nie udało się dodać użytkownika</div>
+            
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
