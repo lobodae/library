@@ -26,6 +26,16 @@ h1 {
     
 }
 
+.admin-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: left;
+    justify-content: left;
+    align-items: left;
+
+}
+
 input[type="text"], input[type="password"], input[type="email"] {
     width: 100%;
     padding: 10px;
