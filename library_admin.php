@@ -134,7 +134,7 @@ if ($result->num_rows > 0) {
         // Przyciski Usuń i Edytuj
         $booksList .= "<form action='library_admin.php' method='GET'>";
         $booksList .= "<input type='hidden' name='delete' value='" . $row["id"] . "'>";
-        $booksList .= "<button type='submit'>Usuń</button>";
+        $booksList .= "<button type='submit' name='delete' >Usuń</button>";
         $booksList .= "</form>";
 
         $booksList .= "<button onclick='showEditForm(" . $row["id"] . ")'>Edytuj</button>";
@@ -196,23 +196,34 @@ if ($result->num_rows > 0) {
 
 
 // Usunięcie użytkownika
-if (isset($_GET["delete"])) {
-    $userId = $_GET["delete"];
-
-    $deleteUser = "DELETE FROM `users` WHERE `users`.`id` =$userId";
-    if ($conn->query($deleteUser) === TRUE) {
-        header("Location: library_admin.php");
-        exit();
-    } else {
-        echo "Błąd podczas usuwania książki: " . $conn->error;
-    }
+if(isset($_GET["user_id"])){
+$sql ="DELETE FROM users WHERE `users`.`id` = $_GET[user_id]";
+$conn->query($sql);
+$deleteUser = 0;
+if($conn->affected_rows != 0)
+{
+//echo "USunieto rekord";
+$deleteUser =  $_GET["user_id"];
+header("Location: library_admin.php");
+exit();
+}
+else 
+{
+//echo "Nie usunieto rekorddu";
+$deleteUser = 0 ;
+echo "Błąd podczas usuwania książki: " . $conn->error;
+}
 }
 
 // Edycja użytkownika
-if (isset($_POST["edit"])) {
+if (isset($_POST["user_id"])) {
+    $conn->query($sql);
+    $updateQuery = 0;
     $userId = $_POST["user-id"];
     $newUsername = $_POST["new-username"];
     $newEmail = $_POST["new-email"];
+    
+    
 
     $updateQuery = "UPDATE users SET ";
 
@@ -224,9 +235,12 @@ if (isset($_POST["edit"])) {
     }
 
     $updateQuery = rtrim($updateQuery, ", ");
-    $updateQuery .= " WHERE id=$userId";
+    $updateQuery .= " WHERE `users`.`id` = $_POST[user_id]";
 
-    if ($conn->query($updateQuery) === TRUE) {
+    //if ($conn->query($updateQuery) === TRUE) {
+    if($conn->affected_rows == 1)
+    {
+        $updateQuery = $_POST["user_id"];
         header("Location: library_admin.php");
         exit();
     } else {
@@ -257,12 +271,12 @@ if ($result->num_rows > 0) {
 
 
         // Przyciski Usuń i Edytuj
-        $usersList .= "<form action='library_admin.php' method='GET'>";
-        $usersList .= "<input type='hidden' name='delete' value='" . $row["id"] . "'>";
-        $usersList .= "<button type='submit'>Usuń</button>";
+        $usersList .= "<form action='library_admin.php?user_id=$row[id]' method='POST'>";
+        $usersList .= "<input type='hidden' value='" . $row["id"] . "'>";
+        $usersList .= "<button type='submit' name='delete-book' >Usuń</button>";
         $usersList .= "</form>";
 
-        $usersList .= "<button onclick='showEditForm(" . $row["id"] . ")'>Edytuj</button>";
+        $usersList .= "<button onclick='showEditForm(" . $row["id"] . ")' name='edit-book'>Edytuj</button>";
 
         
         // Formularz edycji
@@ -372,7 +386,7 @@ $conn->close();
 
         <div class="admin-container" style="float: right";>
             <h2>Użytkownicy</h2>
-            <form action="library_admin.php" method="GET">
+            <form action="library_admin.php" method="POST">
                 <!-- <select name="category">
                     <option value="" disabled selected>Wybierz gatunek</option>
                     <option value="fantasy">Fantasy</option>
