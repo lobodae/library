@@ -49,9 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($conn->query($insertUserQuery) === TRUE) {
                 // Rejestracja udana
-                //echo "Rejestracja udana.";
-                // $alert = "<script>alert('Dodano użytkownika');</script>";
-                // echo $alert;
+                echo "Rejestracja udana.";
                 header(("location: index.html"));
                 exit();
 

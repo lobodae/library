@@ -16,10 +16,10 @@ function message(){
         password.value = '';
         }, 2000);
 
-       // success.style.display = 'block';
+       
     }
     setTimeout(() => {
         danger.style.display = 'none';
-       // success.style.display = 'none';
+       
     }, 4000);
 }

@@ -33,6 +33,7 @@ h1 {
     text-align: left;
     justify-content: left;
     align-items: left;
+    display: inline-flex;
 
 }
 

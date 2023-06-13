@@ -202,14 +202,12 @@ $conn->query($sql);
 $deleteUser = 0;
 if($conn->affected_rows != 0)
 {
-//echo "USunieto rekord";
 $deleteUser =  $_GET["user_id"];
 header("Location: library_admin.php");
 exit();
 }
 else 
 {
-//echo "Nie usunieto rekorddu";
 $deleteUser = 0 ;
 echo "Błąd podczas usuwania książki: " . $conn->error;
 }
@@ -237,7 +235,7 @@ if (isset($_POST["user_id"])) {
     $updateEditQuery = rtrim($updateEditQuery, ", ");
     $updateEditQuery .= " WHERE `users`.`id` = $_POST[user_id]";
 
-    //if ($conn->query($updateQuery) === TRUE) {
+    
     $conn->query($updateEditQuery);
     if($conn->affected_rows == 1)
     {
@@ -369,7 +367,7 @@ $conn->close();
         </div>
     
 
-        <!-- <div class="books-container"> -->
+        
         <div class="admin-container" style="float:left";>
             <h2>Książki w bibliotece</h2>
             <form action="library_admin.php" method="GET">
@@ -389,15 +387,6 @@ $conn->close();
         <div class="admin-container" style="float: right";>
             <h2>Użytkownicy</h2>
             <form action="library_admin.php" method="POST">
-                <!-- <select name="category">
-                    <option value="" disabled selected>Wybierz gatunek</option>
-                    <option value="fantasy">Fantasy</option>
-                    <option value="horror">Horror</option>
-                    <option value="sci-fi">Sci-fi</option>
-                    <option value="comedy">Komedia</option>
-                    <option value="documentary">Dokument</option>
-                </select>
-                <button type="submit">Filtruj</button> -->
             </form>
             <?php echo $usersList; ?>
     </div>

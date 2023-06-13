@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 12 Cze 2023, 22:14
+-- Czas generowania: 13 Cze 2023, 23:38
 -- Wersja serwera: 10.4.27-MariaDB
 -- Wersja PHP: 8.2.0
 
@@ -45,7 +45,7 @@ INSERT INTO `books` (`id`, `title`, `author`, `category`, `nr_polki`, `nr_regal`
 (10, 'Hobbit', 'Tolkien', 'fantasy', '', '', ''),
 (12, 'Szybcy i wsciekli', 'wiadomo', 'sci-fi', '', '', ''),
 (13, 'moje', 'życie', 'comedy', '', '', ''),
-(14, '2222', 'ssss', 'horror', '2', 'R2', 'D');
+(14, 'Romeo bez Julii', 'Szekspir', 'fantasy', '1', 'R2', 'B');
 
 -- --------------------------------------------------------
 
@@ -89,19 +89,12 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `role_id`) VALUES
 (2, 'filip', '', 'kox', 1),
 (3, '1234', '', '1234', 1),
 (4, 'user1', 'user1@wp.pl', 'user1', 2),
-(5, 'user2', 'user2@wp.pl', 'user2', 1),
-(6, 'user3', 'user3@wp.pl', 'user3', 1),
-(7, 'user4', 'user3@wp.pl', 'user3', 1),
-(8, 'userrrr', 'user44@wp.pl', 'user44', 1),
-(9, 'userrrr4', 'user44@wp.pl', 'user44', 1),
-(10, 'test1', 'test@wp.pl', 'test', 1),
-(11, 'test12', 'test@wp.pl', 'test', 1),
-(12, 'user000', 'user0@wp.pl', 'user333', 1),
-(13, 'user1111', 'user111111@wp.pl', 'user00000', 1),
-(15, 'u8', 'u8@wp.pl', 'iiiiiiiiii', 1),
-(16, 'user13', 'user13@wp.pl', 'user13', 1),
-(17, 'user222222', 'user1@wp.pl', 'user2', 1),
-(21, 'userekserek', 'userek1@wp.pl', '$argon2id$v=19$m=65536,t=4,p=1$eXJKQ1ZNQUg0T25PbXdSeA$mLAHuEkv4gqNtXEL7JU5mLucNvDclUhcyZbTQxaEaVI', 1);
+(5, 'user2', 'user2@wp.pl', 'user2', 2),
+(6, 'user3', 'user3@wp.pl', 'user3', 2),
+(21, 'userekserek', 'userek1@wp.pl', '$argon2id$v=19$m=65536,t=4,p=1$eXJKQ1ZNQUg0T25PbXdSeA$mLAHuEkv4gqNtXEL7JU5mLucNvDclUhcyZbTQxaEaVI', 2),
+(22, 'nienowyuser', 'nienowy@wp.pl', '$argon2id$v=19$m=65536,t=4,p=1$MmU3c0RueFh6Rm1BNzJwNg$V6Ud/honmCtTaQVxmVFAu4bc5gDxcxO9V2SzlbtNiWk', 1),
+(23, 'xyz', 'zyx@wp.pl', '$argon2id$v=19$m=65536,t=4,p=1$SlpHdU1xR1dpUE1HbHo4eA$cgRUmtvxFOuySwIR6avB1KD2RAOwfaLNgpI/hVKm6Do', 1),
+(24, 'qwerty', 'qwerty@wp.pl', '$argon2id$v=19$m=65536,t=4,p=1$Ulc2M04yWkdMTElGUlhaWg$7UpgY2kJcKsDXXDCeK2wgVyzmX/wz1OjIRiNYPsjybY', 1);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -146,7 +139,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
