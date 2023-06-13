@@ -215,38 +215,40 @@ echo "Błąd podczas usuwania książki: " . $conn->error;
 }
 }
 
-// Edycja użytkownika
+//Edycja użytkownika
 if (isset($_POST["user_id"])) {
     $conn->query($sql);
-    $updateQuery = 0;
-    $userId = $_POST["user-id"];
+    $updateEditQuery = 0;
+    $userId = $_POST["use_id"];
     $newUsername = $_POST["new-username"];
     $newEmail = $_POST["new-email"];
     
     
 
-    $updateQuery = "UPDATE users SET ";
+    $updateEditQuery = "UPDATE users SET ";
 
     if (!empty($newUsername)) {
-        $updateQuery .= "username='$newUsername', ";
+        $updateEditQuery .= "username='$newUsername', ";
     }
     if (!empty($newEmail)) {
-        $updateQuery .= "email='$newEmail', ";
+        $updateEditQuery .= "email='$newEmail', ";
     }
 
-    $updateQuery = rtrim($updateQuery, ", ");
-    $updateQuery .= " WHERE `users`.`id` = $_POST[user_id]";
+    $updateEditQuery = rtrim($updateEditQuery, ", ");
+    $updateEditQuery .= " WHERE `users`.`id` = $_POST[user_id]";
 
     //if ($conn->query($updateQuery) === TRUE) {
+    $conn->query($updateEditQuery);
     if($conn->affected_rows == 1)
     {
-        $updateQuery = $_POST["user_id"];
+        $updateEditQuery = $_POST["user_id"];
         header("Location: library_admin.php");
         exit();
     } else {
-        echo "Błąd podczas edycji książki: " . $conn->error;
+        echo "Błąd podczas edycji użytkownika: " . $conn->error;
     }
- }
+}
+
 
 
 // Zapytanie SQL do pobrania listy użytkowników
@@ -273,28 +275,28 @@ if ($result->num_rows > 0) {
         // Przyciski Usuń i Edytuj
         $usersList .= "<form action='library_admin.php?user_id=$row[id]' method='POST'>";
         $usersList .= "<input type='hidden' value='" . $row["id"] . "'>";
-        $usersList .= "<button type='submit' name='delete-book' >Usuń</button>";
+        $usersList .= "<button type='submit' name='delete-user' >Usuń</button>";
         $usersList .= "</form>";
 
-        $usersList .= "<button onclick='showEditForm(" . $row["id"] . ")' name='edit-book'>Edytuj</button>";
+        $usersList .= "<button onclick='showEditForm(" . $row["id"] . ")' name='edit-user1'>Edytuj</button>";
 
         
         // Formularz edycji
         $usersList .= "<div id='edit-form-" . $row["id"] . "' style='display: none;'>";
         $usersList .= "<form action='library_admin.php' method='POST'>";
-        $usersList .= "<input type='hidden' name='book-id' value='" . $row["id"] . "'>";
-        $usersList .= "<input type='text' name='new-author' placeholder='Nowy username'>";
-        $usersList .= "<input type='text' name='new-title' placeholder='Nowy email'>";
+        $usersList .= "<input type='hidden' name='user_id' value='" . $row["id"] . "'>";
+        $usersList .= "<input type='text' name='new-username' placeholder='Nowy username'>";
+        $usersList .= "<input type='text' name='new-email' placeholder='Nowy email'>";
 
 
-        $usersList .= "<button type='submit' name='edit'>Zapisz</button>";
+        $usersList .= "<button type='submit' name='edit-user2'>Zapisz</button>";
         $usersList .= "</form>";
         $usersList .= "</div>";
 
         $usersList .= "<hr>";
     }
 } else {
-    $booksList = "Brak książek w bibliotece.";
+    $usersList = "Brak książek w bibliotece.";
 }
 
 $conn->close();
